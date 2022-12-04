@@ -82,13 +82,13 @@ def handle_page(onenote, elem, path, i):
         os.system('pandoc.exe -i %s -o %s -t markdown-simple_tables-multiline_tables-grid_tables --wrap=none' % (path_docx, path_md))
         # Create pdf (for the picture assets)
         onenote.Publish(elem.attrib['ID'], path_pdf, 3, "")
-        # Output picture assets to folder
+        # output picture assets to folder
         image_names = extract_pdf_pictures(path_pdf, path_assets, safe_name)
         # Replace image names in markdown file
         fix_image_names(path_md, image_names)
     except pywintypes.com_error as e:
         log("!!WARNING!! Page Failed: %s" % path_md)
-    # Clean up docx, html
+    # Clean up docx,  html  
     if os.path.exists(path_docx):
         os.remove(path_docx)
     if os.path.exists(path_pdf):
